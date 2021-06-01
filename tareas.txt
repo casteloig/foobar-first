@@ -1,0 +1,18 @@
+2 servicios: x1 Python + x1 Go
+Un servicio se llama foo
+Otro servicio se llama bar
+
+Si vas a /foo en el servicio foo, foo te devuelve foobar
+bar se obtiene al hacer una petición gRPC al endpoint /bar en el servicio bar, el cual retorna bar.
+
+Todo esto tiene que estar en el mismo repo
+Este repo tiene que crear una imagen docker para cada servicio cada vez que hay un cambio en master (Github Actions y Docker Hub)
+Los pushes se hacen con tag latest
+Docker compose para desarrollo en local (docker-compose.yaml)
+
+Test k6 que envie peticiones get al servicio foo y verifique que la respuesta es la esperada.
+
+Hacer makefile en Docker
+
+TIPS: flask en python
+

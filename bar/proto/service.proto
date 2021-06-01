@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+package proto;
+
+message Request {
+    bool a = 1;
+}
+
+message Response {
+    string result = 1;
+}
+
+service BarService {
+    rpc BarFunc(Request) returns (Response) {};
+}
