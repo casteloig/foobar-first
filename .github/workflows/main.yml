@@ -24,6 +24,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          repo-token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
 
       - name: Build image
         run: docker build -t $IMAGE_NAME_FOO foo/
