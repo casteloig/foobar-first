@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+    foo:
+        network_mode: host
+        build:
+            context: foo/
+            dockerfile: Dockerfile
+
+    bar:
+        network_mode: host
+        build:
+            context: bar/
+            dockerfile: Dockerfile
