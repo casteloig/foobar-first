@@ -8,8 +8,8 @@ on:
       - latest
 
 env:
-  IMAGE_NAME_FOO: foo:latest
-  IMAGE_NAME_BAR: bar:latest
+  IMAGE_NAME_FOO: foo
+  IMAGE_NAME_BAR: bar
 
 jobs:
 
