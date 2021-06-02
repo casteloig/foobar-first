@@ -17,4 +17,4 @@ def home():
         response = stub.BarFunc(pb2.Request(a = True))
     return "foo" + response.result
 
-app.run(host='0.0.0.0', port=4000)
+app.run(host='127.0.0.1', port=4000)
