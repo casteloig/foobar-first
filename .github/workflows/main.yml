@@ -14,7 +14,7 @@ env:
 jobs:
 
   # foo
-  push:
+  push_foo:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
@@ -53,7 +53,7 @@ jobs:
 
 
   # bar
-  push:
+  push_bar:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
