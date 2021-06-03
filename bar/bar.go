@@ -4,14 +4,11 @@ import (
 	"context"
 	"log"
 	"net"
+	"os"
 
 	pb "bar.proy1/proto"
 
 	"google.golang.org/grpc"
-)
-
-const (
-	port = "127.0.0.1:4001"
 )
 
 type server struct {
@@ -23,8 +20,20 @@ func (s *server) BarFunc(ctx context.Context, in *pb.Request) (*pb.Response, err
 }
 
 func main() {
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
+
+	ip, err := os.LookupEnv("LIS_IP")
+	if !err {
+		ip = "0.0.0.0"
+	}
+
+	port, err := os.LookupEnv("LIS_PORT")
+	if !err {
+		port = "4001"
+	}
+
+	log.Printf("server listening at %v %v", ip, port)
+	lis, error := net.Listen("tcp", ip+":"+port)
+	if error != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
@@ -34,5 +43,4 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-
 }

@@ -16,3 +16,18 @@ Hacer makefile en Docker
 
 TIPS: flask en python
 
+
+Parte 1:
+Hacer que la direccion de bar, sea una variable de entorno que se pase por parametros al contenedor.
+Hacer que no se comuniquen utilizando el host! Utilizar hostnames. Referencia: https://docs.docker.com/compose/networking/
+Hacer que ambos servicios tengan logs similares (misma structure). Buscar en google: Structured Logging. Cual formato? Da igual, puede ser JSON, logfmt... Lo que quieras.
+Hacer que docker-commands.sh sea un Makefile, y que nos permita usar make build y make run.
+
+Parte 2:
+Añadir un nuevo servicio a nuestro setup llamado: factorial. En el leguaje que quieras (recomendado Go o Python). 
+A este servicio, le vamos a poder hacer una petición POST con un numero (le mandamos un body JSON con el numero... ejemplo {number:123}), y nos va a delvolver.. pues el factorial.
+Este servicio, va a necesitar un contenedor adicional: redis. Utilizar redis como una cache, para almacenar todos los numeros que vayamos calculando.
+Si alguien una petición al servicio, comprobamos si esta en la cache, si no esta, lo calculamos y lo metemos en la cache.
+Importante: factorial tiene que ser una function a parte, que vamos a poder testear - tests de unidad (con go test o pytest).
+Opcional: Añadir a la API, la opcion de forzar el re-calculo del numero. Esta opcion es opcional, si no es pone se utiliza la cache por defecto. Ejemplo: { number:123, force:True}
+
