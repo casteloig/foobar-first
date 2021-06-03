@@ -40,8 +40,8 @@ jobs:
           tags: casteloig/foobar-foo:latest
         
 
-  # foo
-  push_foo:
+  # fbar
+  push_bar:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
