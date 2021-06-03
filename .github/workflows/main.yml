@@ -37,7 +37,7 @@ jobs:
         with:
           push: true
           context: foo/
-          tags: casteloig/foobar-foo:latest
+          tags: casteloig/foobar-first:foo
               # IMPROVEMENT: substitute "casteloig" for env_variable
         
 
@@ -62,4 +62,4 @@ jobs:
         with:
           push: true
           context: bar/
-          tags: casteloig/foobar-bar:latest
+          tags: casteloig/foobar-first:bar
