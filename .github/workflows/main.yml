@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          tags: ${DOCKER_USER}/{IAMGE_NAME_FOO}:latest
+          tags: ${DOCKER_USER}/${IAMGE_NAME_FOO}:latest
         
 
   # foo
