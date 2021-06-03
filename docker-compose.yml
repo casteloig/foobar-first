@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+    foo:
+        image: casteloig/foobar-first:foo
+        ports:
+            - "4000:4000"
+        environment:
+            - LIS_IP=0.0.0.0
+            - LIS_PORT=4000
+            - BAR_ENDPOINT=bar:4001
+
+    bar:
+        image: casteloig/foobar-first:bar
+        ports: 
+            - "4001:4001"
+        environment:
+            - LIS_IP=0.0.0.0
+            - LIS_PORT=4001
