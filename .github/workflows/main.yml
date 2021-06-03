@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repo-token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
       
       - name: Docker login
         run: |
@@ -41,7 +41,7 @@ jobs:
         
 
   # foo
-  push_bar:
+  push_foo:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -49,14 +49,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repo-token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
-
-      - name: Build image
-        run: docker build -t ${IMAGE_NAME_BAR}:latest bar/
+          token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
       
       - name: Docker login
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-      - name: Push image
-        run: docker push ${DOCKER_USER}/foobar-first
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          push: true
+          context: bar/
+          tags: ${DOCKER_USER}/foobar-bar:latest
