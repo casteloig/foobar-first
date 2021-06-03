@@ -38,6 +38,7 @@ jobs:
           push: true
           context: foo/
           tags: casteloig/foobar-foo:latest
+              # IMPROVEMENT: substitute "casteloig" for env_variable
         
 
   # fbar
@@ -61,4 +62,4 @@ jobs:
         with:
           push: true
           context: bar/
-          tags: ${DOCKER_USER}/foobar-bar:latest
+          tags: casteloig/foobar-bar:latest
