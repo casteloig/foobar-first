@@ -14,7 +14,7 @@ app.config["DEBUG"] = True
 
 ip = os.getenv('LIS_IP', "0.0.0.0")
 port = os.getenv('LIS_PORT', "4000")
-bar_endpoint = os.getenv('BAR_ENDPOINT', "4001")
+bar_endpoint = os.getenv('BAR_ENDPOINT', "bar:4001")
 
 @app.route('/foo', methods=['GET'])
 def home():
