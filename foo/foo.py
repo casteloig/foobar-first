@@ -9,6 +9,9 @@ sys.path.append('./proto')
 import service_pb2 as pb2
 import service_pb2_grpc as pb2_grpc
 
+
+
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -19,9 +22,17 @@ bar_endpoint = os.getenv('BAR_ENDPOINT', "bar:4001")
 @app.route('/foo', methods=['GET'])
 def home():
 
+ 
     with grpc.insecure_channel(bar_endpoint) as channel:
         stub = pb2_grpc.BarServiceStub(channel)
         response = stub.BarFunc(pb2.Request(a = True))
     return "foo" + response.result
 
+
+
 app.run(host=ip, port=port)
+
+#import logging
+
+#logging.basicConfig(filename='foo.log', filemode='x+a', format='%(name)s - %(levelname)s - %(message)s')
+# logging.info('Sending gRPC request to ' + bar_endpoint)
