@@ -33,8 +33,6 @@ services:
             - LIS_PORT=4002
 
     redis:
-        build:
-            context: src/factorial/cache-redis
-            dockerfile: Dockerfile
+        image: redis:latest
         ports:
             - "6379:6379"

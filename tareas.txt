@@ -31,3 +31,18 @@ Si alguien una petición al servicio, comprobamos si esta en la cache, si no est
 Importante: factorial tiene que ser una function a parte, que vamos a poder testear - tests de unidad (con go test o pytest).
 Opcional: Añadir a la API, la opcion de forzar el re-calculo del numero. Esta opcion es opcional, si no es pone se utiliza la cache por defecto. Ejemplo: { number:123, force:True}
 
+
+
+Refactor:
+- Manejo de errores. Retornar codigos de error HTTP con sentidiño. Que retorna foo si bar no funciona? Que pasa si el JSON que el usuario envía a factorial no es valido?
+- Tenemos tests, pero no los corremos en CI. Añadirlos a Github actions. Si los test pasan, hacer build/push de los diferentes servicios a Docker Hub.
+- Usar más el .gitignore. Ejemplo? Artefactos de Pycache. Investigar buenas practicas.
+- Eliminar el Dockerfile de Redis, no hace falta. Utilizar la imagen oficial en todo momento.
+
+Parte 3:
+- Parece ser que los requisitos de factorial han cambiado un poco. Añadir soporte en este servicio para fibonacci! Se tiene que: renombrar el servicio a algo que tenga más sentido (math?) y añadir un nuevo endpoint. Utilizar Redis para caching (atención: investigar estructuras de datos disponibles en redis).
+
+[Bonus - opcional]:
+- Hacer un pequeño script en Python, que, utilizando la API de starwars (https://swapi.dev/) calcule el factorial, de la gravedad de cada planeta/planetoide de dicho universo.
+- Permitir: pasar argumentos por la linea de comandos y ofrecer dos subcomandos (all y planet). All calculara el factorial para todos los planetas, mientras que planet te permite calcular
+un factorial de un planeta concreto (le pasamos el nombre)
