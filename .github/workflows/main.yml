@@ -36,12 +36,12 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          context: foo/
+          context: src/foo/
           tags: casteloig/foobar-first:foo
               # IMPROVEMENT: substitute "casteloig" for env_variable
         
 
-  # fbar
+  # bar
   push_bar:
 
     runs-on: ubuntu-latest
@@ -61,5 +61,51 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          context: bar/
+          context: src/bar/
           tags: casteloig/foobar-first:bar
+
+
+  push_factorial:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+      
+      - name: Docker login
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          push: true
+          context: src/factorial/
+          tags: casteloig/foobar-first:factorial
+
+
+  push_redis:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+      
+      - name: Docker login
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          push: true
+          context: src/factorial/cache-redis
+          tags: casteloig/foobar-first:redis

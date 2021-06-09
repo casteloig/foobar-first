@@ -3,7 +3,7 @@ version: '3.8'
 services:
     foo:
         build:
-            context: foo/
+            context: src/foo/
             dockerfile: Dockerfile
         ports:
             - "4000:4000"
@@ -14,10 +14,27 @@ services:
 
     bar:
         build:
-            context: bar/
+            context: src/bar/
             dockerfile: Dockerfile
         ports: 
             - "4001:4001"
         environment:
             - LIS_IP=0.0.0.0
             - LIS_PORT=4001
+
+    factorial:
+        build:
+            context: src/factorial
+            dockerfile: Dockerfile
+        ports: 
+            - "4002:4002"
+        environment:
+            - LIS_IP=0.0.0.0
+            - LIS_PORT=4002
+
+    redis:
+        build:
+            context: src/factorial/cache-redis
+            dockerfile: Dockerfile
+        ports:
+            - "6379:6379"
