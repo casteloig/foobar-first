@@ -1,6 +1,6 @@
 import pytest
 import sys
-sys.path.append('../src/math')
+sys.path.append('../src/maths')
 import funcs as f
 
 @pytest.mark.parametrize(
