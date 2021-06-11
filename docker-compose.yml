@@ -19,7 +19,7 @@ services:
             - LIS_PORT=4001
 
     factorial:
-        image: casteloig/foobar-first:factorial
+        image: casteloig/foobar-first:mathy
         ports: 
             - "4002:4002"
         environment:
@@ -27,6 +27,6 @@ services:
             - LIS_PORT=4002
         
     redis:
-        image: casteloig/foobar-first:redis
+        image: redis:latest
         ports:
             - "6379:6379"

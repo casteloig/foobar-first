@@ -1,5 +1,5 @@
 import flask
-from flask import app, abort 
+from flask import app, abort, jsonify
 
 import grpc
 import sys
@@ -35,13 +35,22 @@ log.info('Initialized')
 @app.errorhandler(400)
 def bad_request(error):
     log.info('bad request')
-    return 'Bad request :P '
+    response = {
+        'Message': 'Bad request',
+        'Code': '400'
+    }
+    return jsonify(response), 400
 
 
 @app.errorhandler(503)
 def service_unavailable(error):
     log.info('service unavailable')
-    return 'Service unavailable :P '
+    response = {
+        'Message': 'Service unavailable',
+        'Code': '503'
+    }
+    return jsonify(response), 503
+
 
 
 

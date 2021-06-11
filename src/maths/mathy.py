@@ -1,6 +1,5 @@
 import flask
-from flask import request, abort, json
-from flask_restx import api
+from flask import request, abort, jsonify
 
 import logging
 from pythonjsonlogger import jsonlogger
@@ -10,10 +9,8 @@ import sys
 sys.path.append('./')
 import redis
 
-import logging
-from pythonjsonlogger import jsonlogger
-
 import funcs as f
+
 
 
 redis = redis.Redis(
@@ -43,13 +40,21 @@ log.info('Initialized')
 @app.errorhandler(400)
 def bad_request(error):
     log.info('bad request')
-    return 'Bad request :P '
+    response = {
+        'Message': 'Bad request',
+        'Code': '400'
+    }
+    return jsonify(response), 400
 
 
 @app.errorhandler(503)
 def service_unavailable(error):
     log.info('service unavailable')
-    return 'Service unavailable :P '
+    response = {
+        'Message': 'Service unavailable',
+        'Code': '503'
+    }
+    return jsonify(response), 503
 
 
 
@@ -84,7 +89,7 @@ def fibonacci():
     except:
         abort(400)
 
-    # # Checking in cache, calculate otherwise
+    # Checking in cache, calculate otherwise
     try:
         result = redis.get(str(number))
 

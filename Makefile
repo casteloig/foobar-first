@@ -13,7 +13,7 @@ help:
 build:
 	@docker build -t foobar-foo:latest src/foo/
 	@docker build -t foobar-bar:latest src/bar/
-	@docker build -t foobar-factorial:latest src/factorial
+	@docker build -t foobar-math:latest src/maths
 	@docker pull redis:latest
 
 .PHONY: net
@@ -24,6 +24,6 @@ net:
 run:
 	@docker run -d -e LIS_IP='0.0.0.0' -e LIS_PORT='4000' -e BAR_ENDPOINT='bar:4001' --name foo --net foobar-dev_default -p 4000:4000 foobar-foo:latest
 	@docker run -d -e LIS_IP='0.0.0.0' -e LIS_PORT='4001' --name bar --net foobar-dev_default -p 4001:4001 foobar-bar:latest
-	@docker run -d --name redis --p 6379:6379 redis:latest
-	@docker run -d -e LIS_IP='0.0.0.0' -e LIS_PORT='4002' --name factorial --net foobar-dev_default -p 4002:4002 foobar-factorial:latest
+	@docker run -d --name redis -p 6379:6379 redis:latest
+	@docker run -it -e LIS_IP='0.0.0.0' -e LIS_PORT='4002' --name math --net foobar-dev_default -p 4002:4002 foobar-math:latest
 	

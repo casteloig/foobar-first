@@ -92,6 +92,6 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          context: src/math/
-          tags: casteloig/foobar-first:math
+          context: src/maths/
+          tags: casteloig/foobar-first:mathy
 

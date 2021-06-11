@@ -22,9 +22,9 @@ services:
             - LIS_IP=0.0.0.0
             - LIS_PORT=4001
 
-    factorial:
+    math:
         build:
-            context: src/factorial
+            context: src/maths
             dockerfile: Dockerfile
         ports: 
             - "4002:4002"
