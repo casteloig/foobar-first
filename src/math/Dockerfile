@@ -3,8 +3,8 @@ FROM python
 RUN mkdir /app
 WORKDIR /app
 
-COPY factorial.py .
-COPY func_factorial.py .
+COPY math.py .
+COPY funcs.py .
 COPY requirements.txt .
 
 EXPOSE 4002

@@ -64,13 +64,24 @@ jobs:
           context: src/bar/
           tags: casteloig/foobar-first:bar
 
-
-  push_factorial:
+  
+  push_math:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
+
+      test:
+        name: Run tests
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@master
+          - name: Test
+        uses: skx/github-action-tester@master
+        with:
+          script: test/test_math.py
+
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
@@ -84,28 +95,6 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           push: true
-          context: src/factorial/
-          tags: casteloig/foobar-first:factorial
+          context: src/math/
+          tags: casteloig/foobar-first:math
 
-
-  # push_redis:
-
-  #   runs-on: ubuntu-latest
-  #   if: github.event_name == 'push'
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
-      
-  #     - name: Docker login
-  #       run: |
-  #         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-
-  #     - name: Build and push Docker images
-  #       id: docker_build
-  #       uses: docker/build-push-action@v2.5.0
-  #       with:
-  #         push: true
-  #         context: src/factorial/cache-redis
-  #         tags: casteloig/foobar-first:redis

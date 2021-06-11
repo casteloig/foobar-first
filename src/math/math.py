@@ -13,7 +13,7 @@ import redis
 import logging
 from pythonjsonlogger import jsonlogger
 
-import func_factorial as f
+import funcs as f
 
 
 redis = redis.Redis(
@@ -53,8 +53,8 @@ def service_unavailable(error):
 
 
 
-@app.route('/', methods=['POST'])
-def home():
+@app.route('/factorial', methods=['POST'])
+def factorial():
     # Getting field number on request
     try:
         number = request.get_json()["number"]
@@ -67,6 +67,29 @@ def home():
 
         if result == None:
             result = f.factorial(int(number))
+            redis.set(number, str(result))
+            return str(result)
+        else:
+            return number
+    
+    except:
+        abort(503)
+
+
+@app.route('/fibonacci', methods=['POST'])
+def fibonacci():
+    # Getting field number on request
+    try:
+        number = request.get_json()["number"]
+    except:
+        abort(400)
+
+    # # Checking in cache, calculate otherwise
+    try:
+        result = redis.get(str(number))
+
+        if result == None:
+            result = f.fib(int(number))
             redis.set(number, str(result))
             return str(result)
         else:
