@@ -76,13 +76,15 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
       
-      - name: Run test
+      - name: install dependences
         run: |
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          cd /test
-          pytest
+
+      - name: Run test
+        run: pytest
+        working-directory: /test
 
       - name: Docker login
         run: |
