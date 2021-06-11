@@ -72,20 +72,13 @@ jobs:
 
     steps:
 
-      test:
-        name: Run tests
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@master
-          - name: Test
-        uses: skx/github-action-tester@master
-        with:
-          script: test/test_math.py
-
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
       
+      - name: Test
+        run: test/test_math.py
+
       - name: Docker login
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
