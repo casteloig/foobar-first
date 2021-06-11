@@ -81,13 +81,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-      - name: Run test
         working-directory: /test
         run: pytest
+
+        
 
       - name: Docker login
         run: |
