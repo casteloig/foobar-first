@@ -1,4 +1,5 @@
 chuletas-docker.txt
 tareas.txt
-src/foo/logs_foo.logs
-src/bar/logs_bar.logs
+*.log
+__pycache__/
+.pytest_cache/

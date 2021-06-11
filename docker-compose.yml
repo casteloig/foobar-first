@@ -17,3 +17,16 @@ services:
         environment:
             - LIS_IP=0.0.0.0
             - LIS_PORT=4001
+
+    factorial:
+        image: casteloig/foobar-first:factorial
+        ports: 
+            - "4002:4002"
+        environment:
+            - LIS_IP=0.0.0.0
+            - LIS_PORT=4002
+        
+    redis:
+        image: casteloig/foobar-first:redis
+        ports:
+            - "6379:6379"
