@@ -76,8 +76,12 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
       
-      - name: Test
-        run: test/test_math.py
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+        - run: python3 test/test_math.py
+
 
       - name: Docker login
         run: |
