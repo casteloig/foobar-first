@@ -1,7 +1,7 @@
 import pytest
 import sys
-sys.path.append('../src/factorial')
-import func_factorial as f
+sys.path.append('../src/math')
+import funcs as f
 
 @pytest.mark.parametrize(
     "input,expected",
@@ -14,3 +14,16 @@ import func_factorial as f
 )
 def test_factorial(input,expected):
     assert f.factorial(input) == expected
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        (1,0),
+        (5,3),
+        (-1,"NAN"),
+        (0, "NAN")
+    ]
+)
+def test_fibonacci(input,expected):
+    assert f.fib(input) == expected

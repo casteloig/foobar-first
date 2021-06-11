@@ -1,3 +1,4 @@
+import flask
 from flask import app, abort 
 
 import grpc
@@ -60,5 +61,7 @@ def home():
     return "foo" + response.result
 
 
-app.run(host=ip, port=port)
-
+try:
+    app.run(host=ip, port=port)
+except:
+    abort(503)
