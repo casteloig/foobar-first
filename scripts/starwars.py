@@ -1,21 +1,12 @@
 import requests
 import sys
-import json
+
 
 
 planets_full_json = requests.get('https://swapi.dev/api/planets').json()
-count = planets_full_json["count"]
 planets_results = planets_full_json["results"]
 
-def factorial(number):
-    number = int(round(number))
-
-    if number > 1:
-        return factorial(number-1)*number
-    elif number < 1:
-        return ("NAN")
-    else:
-        return 1
+url = 'http://localhost:4002/factorial'
 
 
 def factorial_planet(planet):
@@ -28,7 +19,11 @@ def factorial_planet(planet):
             gravity_string = iterator["gravity"].split()
             
             if gravity_string[0] != 'N/A':
-                print('Factorial: ' + str((factorial(float(gravity_string[0])))))
+                request = {}
+                number = int(round(float(gravity_string[0])))
+                request['number'] = number
+                response = requests.post(url, json=request)
+                print('Factorial ' + str(response.json()))
 
     if flag == False:
         print('There is no planet with that name')
@@ -42,9 +37,12 @@ def factorial_all():
         gravity_string = iterator["gravity"].split()
 
         if gravity_string[0] != 'N/A':
-            print('Factorial: ' + str((factorial(float(gravity_string[0])))))
+            request = {}
+            number = int(round(float(gravity_string[0])))
+            request['number'] = number
+            response = requests.post(url, json=request)
+            print('Factorial ' + str(response.json()))
 
-        print()
 
 
 
