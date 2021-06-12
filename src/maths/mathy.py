@@ -13,10 +13,12 @@ import funcs as f
 
 
 
-redis = redis.Redis(
+redis = redis.StrictRedis(
     host = 'redis',
     port= '6379',
-    db=0
+    db=0,
+    charset="utf-8",
+    decode_responses=True
 )
 
 app = flask.Flask(__name__)
@@ -68,14 +70,14 @@ def factorial():
 
     # Checking in cache, calculate otherwise
     try:
-        result = redis.hget("factorial", str(number))
+        result = redis.hget("factorial", number)
 
         if result == None:
             result = f.factorial(int(number))
             redis.hset("factorial", key=number, value=str(result))
             return str(result)
         else:
-            return number
+            return str(result)
     
     except:
         abort(503)
@@ -91,14 +93,14 @@ def fibonacci():
 
     # Checking in cache, calculate otherwise
     try:
-        result = redis.hget("fibonacci", str(number))
+        result = redis.hget("fibonacci", number)
 
         if result == None:
             result = f.fib(int(number))
             redis.hset("fobinacci", key=number, value=str(result))
             return str(result)
         else:
-            return number
+            return str(result)
     
     except:
         abort(503)
