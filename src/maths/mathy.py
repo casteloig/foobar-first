@@ -68,11 +68,11 @@ def factorial():
 
     # Checking in cache, calculate otherwise
     try:
-        result = redis.get(str(number))
+        result = redis.hget("factorial", str(number))
 
         if result == None:
             result = f.factorial(int(number))
-            redis.set(number, str(result))
+            redis.hset("factorial", key=number, value=str(result))
             return str(result)
         else:
             return number
@@ -91,11 +91,11 @@ def fibonacci():
 
     # Checking in cache, calculate otherwise
     try:
-        result = redis.get(str(number))
+        result = redis.hget("fibonacci", str(number))
 
         if result == None:
             result = f.fib(int(number))
-            redis.set(number, str(result))
+            redis.hset("fobinacci", key=number, value=str(result))
             return str(result)
         else:
             return number
