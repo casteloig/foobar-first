@@ -67,7 +67,7 @@ def home():
         abort(503)
     
 
-    return "foo" + response.result
+    return f"foo{response.result}"
 
 
 try:
