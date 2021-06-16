@@ -55,7 +55,7 @@ def home():
         with grpc.insecure_channel(bar_endpoint) as channel:
             stub = pb2_grpc.BarServiceStub(channel)
             response = stub.BarFunc(pb2.Request(a=True))
-    except:
+    except grpc.RpcError:
         abort(503)
 
     return f"foo{response.result}"
@@ -63,5 +63,5 @@ def home():
 
 try:
     app.run(host=ip, port=port)
-except:
+except grpc.RpcError:
     abort(503)
