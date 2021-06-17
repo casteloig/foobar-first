@@ -1,9 +1,14 @@
 import requests
 import sys
 
+try:
+    planets_full_json = requests.get("https://swapi.dev/api/planets").json()
+except Exception as e:
+    print(f"Error ocurred while getting API information: {e}")
+    exit()
 
-planets_full_json = requests.get("https://swapi.dev/api/planets").json()
 planets_results = planets_full_json["results"]
+
 
 url = "http://localhost:4002/factorial"
 
@@ -21,8 +26,11 @@ def factorial_planet(planet):
                 request = {}  # dictionary tipe
                 number = int(round(float(gravity_string[0])))
                 request["number"] = number
-                response = requests.post(url, json=request)
-                print(f"Factorial {str(response.json())}")
+                try:
+                    response = requests.post(url, json=request)
+                    print(f"Factorial {str(response.json())}")
+                except Exception as e:
+                    print(e)
 
     if flag == False:
         print("There is no planet with that name")
@@ -38,8 +46,11 @@ def factorial_all():
             request = {}  # dictionary type
             number = int(round(float(gravity_string[0])))
             request["number"] = number
-            response = requests.post(url, json=request)
-            print(f"Factorial {str(response.json())}")
+            try:
+                response = requests.post(url, json=request)
+                print(f"Factorial {str(response.json())}")
+            except Exception as e:
+                print(e)
 
 
 if len(sys.argv) > 4:
