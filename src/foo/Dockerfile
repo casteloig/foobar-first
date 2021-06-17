@@ -1,11 +1,13 @@
-FROM python:3.8.5
+FROM python
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir -p /src/foo
+WORKDIR /src/foo
 
 COPY proto/ ./proto/
 COPY foo.py .
 COPY requirements.txt .
+
+ENV PYTHONPATH "${PYTHONPATH}:/"
 
 EXPOSE 4000
 

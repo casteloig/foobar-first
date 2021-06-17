@@ -6,8 +6,8 @@ import sys
 import os
 
 sys.path.append("./proto")
-import service_pb2 as pb2
-import service_pb2_grpc as pb2_grpc
+from src.foo.proto import service_pb2 as pb2
+from src.foo.proto import service_pb2_grpc as pb2_grpc
 
 import logging
 from pythonjsonlogger import jsonlogger

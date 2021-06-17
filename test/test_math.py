@@ -1,8 +1,7 @@
 import pytest
 import sys
 
-sys.path.append("../src/maths")
-import funcs as f
+from src.maths import funcs as f
 
 
 @pytest.mark.parametrize("input,expected", [(1, 1), (5, 120), (-1, "NAN"), (0, "NAN")])

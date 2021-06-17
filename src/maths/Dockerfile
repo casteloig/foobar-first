@@ -1,11 +1,13 @@
 FROM python
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir -p /src/maths
+WORKDIR /src/maths
 
 COPY mathy.py .
 COPY funcs.py .
 COPY requirements.txt .
+
+ENV PYTHONPATH "${PYTHONPATH}:/"
 
 EXPOSE 4002
 

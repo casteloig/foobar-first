@@ -7,10 +7,9 @@ from pythonjsonlogger import jsonlogger
 import os
 import sys
 
-sys.path.append("./")
 from redis import StrictRedis, ConnectionError, DataError
 
-import funcs as f
+from src.maths import funcs as f
 
 
 redis_client = StrictRedis(
