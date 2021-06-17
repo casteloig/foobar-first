@@ -1,3 +1,5 @@
+SHELL = /bin/sh
+
 
 .PHONY: help
 help:
@@ -7,6 +9,7 @@ help:
 	@echo "build  -> builds both containers"
 	@echo "run    -> runs both containers"
 	@echo "net    -> create network for containers communication"
+	@echo "test   -> test factorial and test functions"
 
 
 .PHONY: build
@@ -26,4 +29,8 @@ run:
 	@docker run -d -e LIS_IP='0.0.0.0' -e LIS_PORT='4001' --name bar --net foobar-dev_default -p 4001:4001 foobar-bar:latest
 	@docker run -d --name redis -p 6379:6379 redis:latest
 	@docker run -it -e LIS_IP='0.0.0.0' -e LIS_PORT='4002' --name math --net foobar-dev_default -p 4002:4002 foobar-math:latest
+
+.PHONY: test
+test:
+	@PYTHONPATH=$(shell pwd) pytest --verbose
 	
