@@ -14,6 +14,19 @@ url = "http://localhost:4002/factorial"
 
 
 def factorial_planet(planet):
+    """
+    Prints the planet's gravity factorial
+
+    Parameters
+    ----------
+        planet : str
+            planet name (first letter must be capital letter)
+
+    Returns
+    -------
+        None
+    """
+
     flag = False
 
     for iterator in planets_results:
@@ -37,6 +50,19 @@ def factorial_planet(planet):
 
 
 def factorial_all():
+    """
+    Prints the gravity factorial of the list of all planets contained in the
+    global variable 'planets_result'
+
+    Parameters
+    ----------
+        None
+
+    Returns
+    -------
+        None
+    """
+
     for iterator in planets_results:
         print(f'Planet: {iterator["name"]}')
         print(f'Gravity: {iterator["gravity"]}')

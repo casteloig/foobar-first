@@ -58,17 +58,27 @@ def service_unavailable(error):
     return jsonify(response), 503
 
 
-# @app.errorhandler(Exception)
-# def unhandled_exception(error):
-#     log.info("Unhandled exception")
-#     code = f"{error.code}"
-#     details = f"{error.description}"
-#     response = {"Message": "Unhandled exception", "Code": code, "Details": details}
-#     return jsonify(response), error.code
-
-
 @app.route("/factorial", methods=["POST"])
 def factorial():
+    """
+    Endpoint [POST] - Returns number's factorial corresponding to the
+    number passed on the request
+
+    Parameters
+    ----------
+        : Json
+            "number": int/str (must have this field)
+
+    Returns
+    -------
+        400:
+            Bad request
+        503:
+            - Connection error with cache (Redis)
+            - Data error setting values on cache (Redis)
+        200:
+            Everything is fine
+    """
     # We dont handle error 400 manually bcause errorhandler does auto
     number = request.get_json()["number"]
 
@@ -89,6 +99,26 @@ def factorial():
 
 @app.route("/fibonacci", methods=["POST"])
 def fibonacci():
+    """
+    Endpoint [POST] - Returns the fibonacci's index number corresponding to the
+    number passed on the request
+
+    Parameters
+    ----------
+        : Json
+            "number": int/str (must have this field)
+
+    Returns
+    -------
+        400:
+            Bad request
+        503:
+            - Connection error with cache (Redis)
+            - Data error setting values on cache (Redis)
+        200:
+            Everything is fine
+    """
+
     # Getting field number on request
     try:
         number = request.get_json()["number"]
