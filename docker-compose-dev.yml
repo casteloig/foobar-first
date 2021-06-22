@@ -36,3 +36,10 @@ services:
         image: redis:latest
         ports:
             - "6379:6379"
+
+    nginx:
+        build:
+            context: src/reverse_proxy
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"

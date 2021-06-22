@@ -1,5 +1,4 @@
 import pytest
-import sys
 
 from src.maths import funcs as f
 

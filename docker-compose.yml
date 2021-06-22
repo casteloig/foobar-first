@@ -19,7 +19,7 @@ services:
             - LIS_PORT=4001
 
     factorial:
-        image: casteloig/foobar-first:mathy
+        image: casteloig/foobar-first:maths
         ports: 
             - "4002:4002"
         environment:
@@ -30,3 +30,10 @@ services:
         image: redis:latest
         ports:
             - "6379:6379"
+
+    nginx:
+        build:
+            context: casteloig/foobar-first:proxy
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"

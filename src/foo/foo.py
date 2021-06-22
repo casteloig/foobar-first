@@ -20,6 +20,9 @@ app.config["DEBUG"] = True
 ip = os.getenv("LIS_IP", "0.0.0.0")
 port = os.getenv("LIS_PORT", "4000")
 bar_endpoint = os.getenv("BAR_ENDPOINT", "bar:4001")
+auth_token = os.getenv(
+    "AUTH_TOKEN",
+)
 
 # Logs
 log = logging.getLogger(__name__)
@@ -59,6 +62,21 @@ def home():
         abort(503)
 
     return f"foo{response.result}"
+
+
+# @app.route("/foos", methods=["POST"])
+# def home():
+
+#     log.info("/foo called")
+
+#     try:
+#         with grpc.insecure_channel(bar_endpoint) as channel:
+#             stub = pb2_grpc.BarServiceStub(channel)
+#             response = stub.BarFunc(pb2.Request(a=True))
+#     except grpc.RpcError:
+#         abort(503)
+
+#     return f"foo{response.result}"
 
 
 try:
